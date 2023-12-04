@@ -30,37 +30,40 @@ int compare(){
 	return 0;
 }
 void command_parser_fsm(){
-	switch(status){
-	case INIT:
-		if(buffer[index_buffer - 1] == '!'){
-			status = RECEIVE;
-		}
-		break;
-	case RECEIVE:
-		if(buffer[index_buffer - 1] == '#'){
-			cmd = compare();
-			if(cmd == RST){
-				command_flag = 1;
-				HAL_ADC_Start(&hadc1);
-				ADC_value = HAL_ADC_GetValue(&hadc1);
-				HAL_ADC_Stop(&hadc1);
-				status = INIT;
-				clearBuffer();
-				break;
+	if(buffer_flag == 1){
+		switch(status){
+		case INIT:
+			if(buffer[index_buffer - 1] == '!'){
+				status = RECEIVE;
 			}
-			else if(cmd == OK){
-				command_flag = 0;
-				status = INIT;
-				timer_flag[0] = 1;
-				HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, GPIO_PIN_SET);
-				clearBuffer();
-				break;
+			break;
+		case RECEIVE:
+			if(buffer[index_buffer - 1] == '#'){
+				cmd = compare();
+				if(cmd == RST){
+					command_flag = 1;
+					HAL_ADC_Start(&hadc1);
+					ADC_value = HAL_ADC_GetValue(&hadc1);
+					HAL_ADC_Stop(&hadc1);
+					status = INIT;
+					clearBuffer();
+					break;
+				}
+				else if(cmd == OK){
+					command_flag = 0;
+					status = INIT;
+					timer_flag[0] = 1;
+					HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, GPIO_PIN_SET);
+					clearBuffer();
+					break;
+				}
 			}
+			break;
+		default:
+			break;
 		}
-		break;
-	default:
-		break;
 	}
+	buffer_flag = 0;
 }
 
 void uart_communication_fsm(){

@@ -22,7 +22,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "scheduler.h"
-#include "global.h"
 #include "software_timer.h"
 #include "fsm.h"
 #include <stdio.h>

@@ -1,0 +1,2 @@
+../Core/Src/global.c:5:6:init_timer	1
+../Core/Src/global.c:9:6:setLED	1
