@@ -1,0 +1,4 @@
+../Core/Src/fsm.c:19:6:clearBuffer	1
+../Core/Src/fsm.c:23:5:compare	6
+../Core/Src/fsm.c:32:6:command_parser_fsm	7
+../Core/Src/fsm.c:66:6:uart_communication_fsm	3
