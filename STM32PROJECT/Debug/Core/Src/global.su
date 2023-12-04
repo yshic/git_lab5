@@ -1,2 +1,1 @@
-../Core/Src/global.c:5:6:init_timer	8	static
-../Core/Src/global.c:9:6:setLED	8	static
+../Core/Src/global.c:5:6:setLED	8	static

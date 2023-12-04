@@ -34,40 +34,40 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := mcu_lab4
+BUILD_ARTIFACT_NAME := mcu_lab5
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-mcu_lab4.elf \
+mcu_lab5.elf \
 
 MAP_FILES += \
-mcu_lab4.map \
+mcu_lab5.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-mcu_lab4.list \
+mcu_lab5.list \
 
 OBJCOPY_HEX += \
-mcu_lab4.hex \
+mcu_lab5.hex \
 
 OBJCOPY_BIN += \
-mcu_lab4.bin \
+mcu_lab5.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: mcu_lab4.elf secondary-outputs
+main-build: mcu_lab5.elf secondary-outputs
 
 # Tool invocations
-mcu_lab4.elf mcu_lab4.map: $(OBJS) $(USER_OBJS) C:\Users\Papa\Desktop\VXL\git_lab4\STM32PROJECT\STM32F103C6UX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "mcu_lab4.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Papa\Desktop\VXL\git_lab4\STM32PROJECT\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mcu_lab4.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+mcu_lab5.elf mcu_lab5.map: $(OBJS) $(USER_OBJS) C:\Users\Papa\Desktop\VXL\git_lab5\STM32PROJECT\STM32F103C6UX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "mcu_lab5.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Papa\Desktop\VXL\git_lab5\STM32PROJECT\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mcu_lab5.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -76,24 +76,24 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-mcu_lab4.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "mcu_lab4.list"
+mcu_lab5.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "mcu_lab5.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-mcu_lab4.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "mcu_lab4.hex"
+mcu_lab5.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "mcu_lab5.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-mcu_lab4.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "mcu_lab4.bin"
+mcu_lab5.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "mcu_lab5.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) default.size.stdout mcu_lab4.bin mcu_lab4.elf mcu_lab4.hex mcu_lab4.list mcu_lab4.map
+	-$(RM) default.size.stdout mcu_lab5.bin mcu_lab5.elf mcu_lab5.hex mcu_lab5.list mcu_lab5.map
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
