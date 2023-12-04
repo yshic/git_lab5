@@ -22,6 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "scheduler.h"
+#include "global.h"
+#include "software_timer.h"
 #include "fsm.h"
 #include <stdio.h>
 /* USER CODE END Includes */
@@ -113,10 +115,11 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  SCH_Add_Task(timerRun(0), 0, 1)
-  SCH_Add_Task(command_parser_fsm(), 0, 1);
+  SCH_Init();
+  setTimer(1000, 0);
+  SCH_Add_Task(timerRun, 0, 1);
+  SCH_Add_Task(command_parser_fsm, 0, 1);
   SCH_Add_Task(uart_communication_fsm, 0, 1);
-  timer_flag(0) = 1;
   while (1)
   {
     /* USER CODE END WHILE */
