@@ -1,4 +1,12 @@
+/*
+ * scheduler.c
+ *
+ *  Created on: Nov 29, 2023
+ *      Author: yshic
+ */
+
 #include "scheduler.h"
+#include "fsm.h"
 #include "main.h"
 
 typedef struct {
@@ -19,9 +27,9 @@ void SCH_Init(void){
         SCH_tasks_G[i].Delay = 0;
         SCH_tasks_G[i].Period = 0;
         SCH_tasks_G[i].RunMe = 0;
-
         SCH_tasks_G[i].TaskID = -1;
     }
+	setTimer(10, 0);
 }
 
 void SCH_Update(void) {
