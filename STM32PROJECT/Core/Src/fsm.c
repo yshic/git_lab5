@@ -5,6 +5,9 @@
  *      Author: yshic
  */
 #include "fsm.h"
+#include "software_timer.h"
+#include <stdio.h>
+#include "string.h"
 
 int status = INIT;
 int command_flag = 0;
@@ -15,6 +18,10 @@ uint8_t buffer[MAX_BUFFER_SIZE];
 uint32_t ADC_value = 0;
 char str[100];
 int cmd = 0;
+
+void timerInit(){
+	setTimer(10, 0);
+}
 
 void clearBuffer(){
 	memset(buffer, 0, sizeof(buffer));
@@ -72,7 +79,7 @@ void uart_communication_fsm(){
 		if(timer_flag[0] == 1){
 			HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
 			HAL_UART_Transmit(&huart2, "\r\n !ADC=",10,1000);
-			HAL_UART_Transmit(&huart2, (void*)str, sprintf(str, "%d#\r\n", ADC_value), 1000);
+			HAL_UART_Transmit(&huart2, (void*)str, sprintf(str, "%u#\r\n", ADC_value), 1000);
 			setTimer(3000, 0);
 		}
 		break;

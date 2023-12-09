@@ -9,9 +9,6 @@
 #define INC_FSM_H_
 
 #include "main.h"
-#include "software_timer.h"
-#include <stdio.h>
-#include "string.h"
 
 #define INIT 		0
 #define RECEIVE 	1
@@ -29,6 +26,7 @@ extern int command_flag;
 extern int status;
 extern int cmd;
 
+void timerInit();
 void clearBuffer();
 int compare();
 void command_parser_fsm();
