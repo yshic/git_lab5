@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "scheduler.h"
 #include "software_timer.h"
+#include "global.h"
 #include "fsm.h"
 #include <stdio.h>
 /* USER CODE END Includes */
@@ -118,6 +119,7 @@ int main(void)
   SCH_Add_Task(timerRun, 0, 1);
   SCH_Add_Task(command_parser_fsm, 0, 1);
   SCH_Add_Task(uart_communication_fsm, 0, 1);
+  SCH_Add_Task(ledBlinky, 0 ,1);
   while (1)
   {
     /* USER CODE END WHILE */
@@ -310,14 +312,14 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_RED_BLINKY_Pin|LED_YELLOW_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : LED_YELLOW_Pin */
-  GPIO_InitStruct.Pin = LED_YELLOW_Pin;
+  /*Configure GPIO pins : LED_RED_BLINKY_Pin LED_YELLOW_Pin */
+  GPIO_InitStruct.Pin = LED_RED_BLINKY_Pin|LED_YELLOW_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(LED_YELLOW_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

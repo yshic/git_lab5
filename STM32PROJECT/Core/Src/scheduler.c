@@ -6,6 +6,7 @@
  */
 
 #include "scheduler.h"
+#include "global.h"
 #include "fsm.h"
 #include "main.h"
 
@@ -29,7 +30,8 @@ void SCH_Init(void){
         SCH_tasks_G[i].RunMe = 0;
         SCH_tasks_G[i].TaskID = -1;
     }
-	setTimer(10, 0);
+	timerInit(); //timer for uart_communication_fsm
+	timerBlinkInit(); //timer for led red blinky
 }
 
 void SCH_Update(void) {
@@ -118,7 +120,7 @@ uint8_t SCH_Delete_Task(uint32_t taskID){
 			}
 		}
 	}
-	return Return_code;
+	return Return_code; // return status
 }
 
 void SCH_Dispatch_Tasks(void){

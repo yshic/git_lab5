@@ -4,6 +4,8 @@
 #include "main.h"
 #include "software_timer.h"
 
-void init_timer();
 void setLED();
+void ledBlinky();
+void timerBlinkInit();
+
 #endif /* INC_GLOBAL_H_ */
