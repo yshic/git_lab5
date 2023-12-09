@@ -115,8 +115,6 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
-  SCH_Add_Task(timerInit, 0, 0);
   SCH_Add_Task(timerRun, 0, 1);
   SCH_Add_Task(command_parser_fsm, 0, 1);
   SCH_Add_Task(uart_communication_fsm, 0, 1);
