@@ -110,12 +110,13 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_UART_Receive_IT (&huart2 , &temp, 1);
+  SCH_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  SCH_Init();
-  setTimer(1000, 0);
+
+  SCH_Add_Task(timerInit, 0, 0);
   SCH_Add_Task(timerRun, 0, 1);
   SCH_Add_Task(command_parser_fsm, 0, 1);
   SCH_Add_Task(uart_communication_fsm, 0, 1);
